@@ -1,0 +1,10 @@
+<h1>Comment#edit</h1>
+
+<%= form_for @comment, url: comment_update_path(@comment), post_id: @comment.post.id  do |f| %>
+  <%= f.label :내용 %>
+	<%= f.text_field :content %><br>
+	<%= f.label :이미지 %>
+	<%= f.file_field :image %>
+	<%= f.submit '작성' %>
+
+<% end %>

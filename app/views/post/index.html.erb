@@ -1,0 +1,14 @@
+<h1>Post#index</h1>
+
+
+제목
+<% @posts.each do |post| %>
+  <p><a href='/post/<%=post.id%>'><%= post.title %>&nbsp;|</a>
+  <a href='/post/destroy/<%=post.id%>'>삭제</a>
+  <% if user_signed_in? %>
+  	<% if current_user == post.user %>
+  		<a href='/post/edit/<%=post.id%>'>수정</a>
+  	<% end %>
+  <% end %>
+  </p>
+<% end %>

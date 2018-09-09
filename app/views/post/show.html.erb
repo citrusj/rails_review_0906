@@ -1,0 +1,30 @@
+<b>제목</b>
+<%=@post.title %>
+<b>내용</b>
+<%=@post.content %>
+<b>올린사람</b>
+<%=@post.user.name %>
+<%= link_to '목록으로', '/post/index' %><br>
+-------------------------------------------<br>
+<% @comments.each do |comment| %>
+	-&nbsp;&nbsp;
+	<%=comment.user.name %>&nbsp;|
+	<%=comment.content %>
+	<img src='<%=comment.img_url%>' height="80px" width="80px"/>
+	<a href='/post/<%=@post.id%>/comments/<%=comment.id%>/destroy'>삭제</a>
+	<% if user_signed_in? %>
+  	<% if current_user == comment.user %>
+	<a href='/post/comments/<%=comment.id%>/edit'>수정</a>
+	<% end%>
+	<% end %>
+	<br>
+<% end %>
+<br>
+-------------------------------------------<br>
+<%= form_for @comment, url: comment_create_path do |f| %>
+	<%= f.label :내용 %>
+	<%= f.text_field :content %><br>
+	<%= f.label :이미지 %>
+	<%= f.file_field :image %>
+	<%= f.submit '작성' %>
+<% end %>
